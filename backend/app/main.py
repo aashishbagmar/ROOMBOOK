@@ -61,9 +61,13 @@ async def lifespan(app: FastAPI):
     # Validate configuration for production
     settings.validate_secrets()
     logger.info(f"Starting RoomBook API [{settings.ENVIRONMENT}]")
-    # Startup — create tables if they don't exist (for SQLite dev mode)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    # Only create tables for SQLite (dev mode), PostgreSQL uses init.sql
+    if "sqlite" in settings.DATABASE_URL.lower():
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        logger.info("Tables created for SQLite")
+    else:
+        logger.info("Using PostgreSQL - tables managed by init.sql")
     # Seed default data
     await _seed_data()
     # Run booking cleanup: mark past bookings as completed & delete >2 months old
