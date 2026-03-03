@@ -1,0 +1,32 @@
+/* FullCalendar theme overrides – only loaded on the calendar page */
+.calendar :global(.fc) {
+  --fc-border-color: #e5e7eb;
+  --fc-button-bg-color: #2563eb;
+  --fc-button-border-color: #2563eb;
+  --fc-button-hover-bg-color: #1d4ed8;
+  --fc-button-hover-border-color: #1d4ed8;
+  --fc-button-active-bg-color: #1e40af;
+  --fc-button-active-border-color: #1e40af;
+  --fc-event-bg-color: #3b82f6;
+  --fc-event-border-color: #2563eb;
+  --fc-today-bg-color: #eff6ff;
+}
+
+.calendar :global(.fc .fc-button) {
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.calendar :global(.fc .fc-toolbar-title) {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.calendar :global(.fc .fc-event) {
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
