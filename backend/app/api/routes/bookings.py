@@ -147,8 +147,9 @@ async def create_booking(
     For recurring bookings, creates one booking per selected day
     between start_date and repeat_until. Conflicting slots are skipped.
     """
-    # ── Convert datetimes to UTC for consistent storage ──────
-    # If timezone-aware, convert to UTC; if naive, assume UTC
+    # ── Handle timezone-aware datetimes from frontend ────────
+    # Frontend now sends ISO strings with timezone info (UTC)
+    # Convert timezone-aware to naive UTC for database storage
     if payload.start_time.tzinfo is not None:
         payload.start_time = payload.start_time.astimezone(timezone.utc).replace(tzinfo=None)
     if payload.end_time.tzinfo is not None:
@@ -394,7 +395,7 @@ async def update_booking(
     if booking.organizer_id != current_user.id and not current_user.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
 
-    # Convert datetimes to UTC for consistent storage
+    # Convert timezone-aware datetimes from frontend to naive UTC
     if payload.start_time:
         if payload.start_time.tzinfo is not None:
             payload.start_time = payload.start_time.astimezone(timezone.utc).replace(tzinfo=None)

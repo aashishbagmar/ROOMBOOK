@@ -121,6 +121,11 @@ export function BookingModal({
       }
     }
 
+    // Convert local datetime to timezone-aware ISO string
+    const toISOString = (localDateTime: string) => {
+      return new Date(localDateTime).toISOString();
+    };
+
     setLoading(true);
 
     try {
@@ -129,8 +134,8 @@ export function BookingModal({
         await api.patch(`/api/bookings/${editBooking!.id}`, {
           title: form.title,
           description: form.description || null,
-          start_time: form.start_time + ":00",
-          end_time: form.end_time + ":00",
+          start_time: toISOString(form.start_time + ":00"),
+          end_time: toISOString(form.end_time + ":00"),
         });
 
         // Also create recurring copies if recurring is toggled
@@ -139,8 +144,8 @@ export function BookingModal({
             room_id: form.room_id,
             title: form.title,
             description: form.description || undefined,
-            start_time: form.start_time + ":00",
-            end_time: form.end_time + ":00",
+            start_time: toISOString(form.start_time + ":00"),
+            end_time: toISOString(form.end_time + ":00"),
             is_recurring: true,
             recurring_days: recurringDays,
             repeat_until: repeatUntil,
@@ -159,8 +164,8 @@ export function BookingModal({
           room_id: form.room_id,
           title: form.title,
           description: form.description || undefined,
-          start_time: form.start_time + ":00",
-          end_time: form.end_time + ":00",
+          start_time: toISOString(form.start_time + ":00"),
+          end_time: toISOString(form.end_time + ":00"),
         };
 
         if (isRecurring) {
