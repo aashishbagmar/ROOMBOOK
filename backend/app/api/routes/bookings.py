@@ -147,9 +147,12 @@ async def create_booking(
     For recurring bookings, creates one booking per selected day
     between start_date and repeat_until. Conflicting slots are skipped.
     """
-    # ── Normalise datetimes to naive (wall-clock) ─────────────
-    payload.start_time = payload.start_time.replace(tzinfo=None)
-    payload.end_time = payload.end_time.replace(tzinfo=None)
+    # ── Convert datetimes to UTC for consistent storage ──────
+    # If timezone-aware, convert to UTC; if naive, assume UTC
+    if payload.start_time.tzinfo is not None:
+        payload.start_time = payload.start_time.astimezone(timezone.utc).replace(tzinfo=None)
+    if payload.end_time.tzinfo is not None:
+        payload.end_time = payload.end_time.astimezone(timezone.utc).replace(tzinfo=None)
 
     # Validate room exists
     room = await _check_room_exists(db, payload.room_id)
@@ -391,11 +394,13 @@ async def update_booking(
     if booking.organizer_id != current_user.id and not current_user.is_admin:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
 
-    # Normalise incoming datetimes to naive (wall-clock)
+    # Convert datetimes to UTC for consistent storage
     if payload.start_time:
-        payload.start_time = payload.start_time.replace(tzinfo=None)
+        if payload.start_time.tzinfo is not None:
+            payload.start_time = payload.start_time.astimezone(timezone.utc).replace(tzinfo=None)
     if payload.end_time:
-        payload.end_time = payload.end_time.replace(tzinfo=None)
+        if payload.end_time.tzinfo is not None:
+            payload.end_time = payload.end_time.astimezone(timezone.utc).replace(tzinfo=None)
 
     # If time is changing, check for overlaps
     new_start = payload.start_time or booking.start_time
