@@ -25,6 +25,23 @@ const nextConfig = {
       },
     ];
   },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "ALLOWALL",
+          },
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self' https://*.outlook.com https://*.office.com https://outlook.office.com https://office.com",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
