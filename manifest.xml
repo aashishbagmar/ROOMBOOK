@@ -15,9 +15,6 @@
   <DisplayName DefaultValue="RoomBook"/>
   <Description DefaultValue="Book meeting rooms directly from Outlook."/>
 
-  <IconUrl DefaultValue="https://roombook-eight.vercel.app/icon.png"/>
-  <HighResolutionIconUrl DefaultValue="https://roombook-eight.vercel.app/icon.png"/>
-
   <SupportUrl DefaultValue="https://roombook-eight.vercel.app"/>
 
   <Hosts>
@@ -65,12 +62,6 @@
                     <Description resid="buttonDescription"/>
                   </Supertip>
 
-                  <Icon>
-                    <bt:Image size="16" resid="icon16"/>
-                    <bt:Image size="32" resid="icon32"/>
-                    <bt:Image size="80" resid="icon80"/>
-                  </Icon>
-
                   <Action xsi:type="ShowTaskpane">
                     <SourceLocation resid="taskpaneUrl"/>
                   </Action>
@@ -90,15 +81,9 @@
 
     <Resources>
 
-      <bt:Images>
-        <bt:Image id="icon16" DefaultValue="https://roombook-eight.vercel.app/icon.png"/>
-        <bt:Image id="icon32" DefaultValue="https://roombook-eight.vercel.app/icon.png"/>
-        <bt:Image id="icon80" DefaultValue="https://roombook-eight.vercel.app/icon.png"/>
-      </bt:Images>
-
       <bt:Urls>
-        <bt:Url id="taskpaneUrl" DefaultValue="https://roombook-eight.vercel.app/login"/>
-        <bt:Url id="functionFile" DefaultValue="https://roombook-eight.vercel.app"/>
+        <bt:Url id="taskpaneUrl" DefaultValue="https://roombook-eight.vercel.app/taskpane.html"/>
+        <bt:Url id="functionFile" DefaultValue="https://roombook-eight.vercel.app/commands.html"/>
       </bt:Urls>
 
       <bt:ShortStrings>
