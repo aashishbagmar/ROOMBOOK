@@ -31,12 +31,8 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           {
-            key: "X-Frame-Options",
-            value: "ALLOWALL",
-          },
-          {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self' https://*.outlook.com https://*.office.com https://outlook.office.com https://office.com",
+            value: "frame-ancestors 'self' https://*.outlook.com https://*.office.com https://*.office365.com https://*.microsoft.com",
           },
         ],
       },
