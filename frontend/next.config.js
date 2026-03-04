@@ -34,6 +34,10 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: "frame-ancestors 'self' https://*.outlook.com https://*.office.com https://*.office365.com https://*.microsoft.com",
           },
+          {
+            key: "X-Frame-Options",
+            value: "",
+          },
         ],
       },
     ];

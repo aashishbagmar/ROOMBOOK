@@ -82,7 +82,7 @@
     <Resources>
 
       <bt:Urls>
-        <bt:Url id="taskpaneUrl" DefaultValue="https://roombook-eight.vercel.app/taskpane.html"/>
+        <bt:Url id="taskpaneUrl" DefaultValue="https://roombook-eight.vercel.app/login"/>
         <bt:Url id="functionFile" DefaultValue="https://roombook-eight.vercel.app/commands.html"/>
       </bt:Urls>
 
